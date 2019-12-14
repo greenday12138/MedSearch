@@ -1,0 +1,4 @@
+#忽略 node模块文件
+*node_modules/
+*.zip
+*.csv
