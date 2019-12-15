@@ -60,11 +60,10 @@ CREATE TABLE IF NOT EXISTS `doctor`(
 
 CREATE TABLE IF NOT EXISTS `article`(
    `article_key` INT AUTO_INCREMENT,
-   `article_id` VARCHAR(20) NOT NULL UNIQUE,
-   `author_order` CHAR(3) NOT NULL,
-   `department` VARCHAR(40) NOT NULL,
+   `article_id` VARCHAR(50) NOT NULL UNIQUE,
+   `author_order` CHAR(10) NOT NULL,
+   `department` TINYTEXT NOT NULL,
    `doctor_id` CHAR(10) NOT NULL,
-   `question_id` VARCHAR(20),
-   PRIMARY KEY ( `article_key` ),
-   FOREIGN KEY (`doctor_id`) REFERENCES `doctor`(`doctor_id`)
+   PRIMARY KEY ( `article_key` )
+   # FOREIGN KEY (`doctor_id`) REFERENCES `doctor`(`doctor_id`)
 );

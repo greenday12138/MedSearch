@@ -11,25 +11,69 @@ var db = {
     database: 'medic'
 }
 
-load_doctor();
+load_article();
 
-function load_doctor(){
-    var connection=mysql.createConnection(db);
+function load_article() {
+    var connection = mysql.createConnection(db);
 
-    let readStream=fs.createReadStream(path.join(__dirname,'../data/temp.csv'),{
-        flags:'r',
-        encoding:'utf8'
+    let readStream = fs.createReadStream(path.join(__dirname, '../data/article.csv'), {
+        flags: 'r',
+        encoding: 'utf8'
     })
-        .pipe(es.split(/\nMA/))
-        .pipe(es.mapSync(function(li){
+        .pipe(es.split())
+        .pipe(es.mapSync(function (li) {
             readStream.pause();
 
-            var str=li;
-            var state=0;
-            for(var i=0,max=str.length;i<max;++i){
-                
+            var data = {};
+            var line = li.split(',');
+            var str = li.split('"');
+            if (str.length > 1) {
+                data.department = str[1];
+            } else {
+                data.department = line[2];
             }
-            var data={};
+            line.reverse();
+            data.article_id = line[2];
+            data.author_order = line[1];
+            data.doctor_id = line[0].split('A').pop();
+            
+            var sql = {
+                sql: 'insert into `article`(article_id,author_order,doctor_id,department) ' +
+                    'values (?,?,?,?)',
+                values: [data.article_id, data.author_order, data.doctor_id, data.department]
+            }
+            if (data.doctor_id.length === 8) {
+                connection.query(sql, function (err, fields) {
+                    if (err) {
+                        console.log(data);
+                        console.error(err);
+                        return;
+                    }
+
+                })
+            }
+
+            readStream.resume();
+        }))
+}
+
+function load_doctor() {
+    var connection = mysql.createConnection(db);
+
+    let readStream = fs.createReadStream(path.join(__dirname, '../data/temp.csv'), {
+        flags: 'r',
+        encoding: 'utf8'
+    })
+        .pipe(es.split(/\nMA/))
+        .pipe(es.mapSync(function (li) {
+            readStream.pause();
+
+            var str = li;
+            var state = 0;
+            for (var i = 0, max = str.length; i < max; ++i) {
+
+            }
+            var data = {};
 
             readStream.resume();
         }))
@@ -49,17 +93,17 @@ function load_hospital() {
             var data = {}
             var line = li.split(',');
             var str = li.split('"');
-            if (str.length===3) {
+            if (str.length === 3) {
                 //retreave introduction strat and end with "
-                lin_0=str[0].split(',');
+                lin_0 = str[0].split(',');
                 data.hospital_id = lin_0[0].split('_').pop();
-                data.hospital_name=lin_0[1];
-                data.hospital_city=lin_0[3];
-                data.hospital_province=lin_0[2];
-                data.hospital_introduction=str[1];
-                lin_1=str[2].split(',');
-                data.hospital_class=lin_1[1];
-                data.hospital_address=lin_1[2];
+                data.hospital_name = lin_0[1];
+                data.hospital_city = lin_0[3];
+                data.hospital_province = lin_0[2];
+                data.hospital_introduction = str[1];
+                lin_1 = str[2].split(',');
+                data.hospital_class = lin_1[1];
+                data.hospital_address = lin_1[2];
             } else {
                 data.hospital_id = line[0].split('_').pop(),
                     data.hospital_name = line[1],
