@@ -1,0 +1,163 @@
+<html>
+
+<head>
+    <title>医疗问诊网站</title>
+    <link rel="stylesheet" href="./lib/bootstrap.css">
+    <link rel="stylesheet" href="lib/fonts/iconfont.css">
+    <link rel="stylesheet" href="./src/style.css">
+    <script src="lib/axios.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+        <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>医疗问诊</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="疾病/医生/医院" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="col-12" style="height: 3rem;"></div>
+
+    <main class="row" style="width: 80%;margin: auto;">
+
+
+        <div class="col-12" style="height: 2rem;"></div>
+
+
+
+        <div class="card col-12 row">
+
+            <div class="card-header">
+                医生推荐
+            </div>
+            <br>
+
+            <form class="form-inline" style="width: 100%;">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option value="0" selected>筛选类别</option>
+                    <option value="1">科室</option>
+                    <option value="2">职称</option>
+                </select>
+
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option value="0" selected>筛选类别</option>
+                    <option value="1">科室</option>
+                    <option value="2">疾病</option>
+                    <option value="3">Three</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary my-1">筛选</button>
+            </form>
+        </div>
+
+        <div class="card col-12 row">
+            <div class="row col-12">
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">八意永琳</h5>
+                        <p>主攻方向：xxxxxx</p>
+                        <a href="#" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">八意永琳</h5>
+                        <p>主攻方向：xxxxxx</p>
+                        <a href="#" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">八意永琳</h5>
+                        <p>主攻方向：xxxxxx</p>
+                        <a href="#" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">八意永琳</h5>
+                        <p>主攻方向：xxxxxx</p>
+                        <a href="#" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col-12" style="height: 2rem;"></div>
+
+        <div class="card col-12 row">
+
+            <div class="card-header">
+                医院指南
+            </div>
+
+            <br>
+
+            <form class="form-inline" style="width: 100%;">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option value="0" selected>省</option>
+                    <option value="1">科室</option>
+                    <option value="2">职称</option>
+                </select>
+
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option value="0" selected>市</option>
+                    <option value="1">科室</option>
+                    <option value="2">疾病</option>
+                    <option value="3">Three</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary my-1">筛选</button>
+            </form>
+
+
+        </div>
+
+        <div class="card col-12 row">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="home-hospital-info">
+                    <div>
+
+                        <div class="home-hospital-container" style="display: inline-block;">
+                            <div class="home-hospital-container-item">
+                                <div class="list-contain">
+                                    <ul class="list-contain-ul">
+                                        <li><a class="hospital" href="#">11111111111111</a></li>
+                                        <li><a class="hospital" href="#">11111111111111</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12" style="height: 2rem;"></div>
+
+    </main>
+
+    <script src="lib/jquery.js"></script>
+    <script src="lib/bootstrap.bundle.js"></script>
+    <script>
+        $(".collapse-open").click(function () {
+            $(".collapse").collapse('hide');
+            let id = $(this).attr('for');
+            $(".collapse[id=\'" + id + "\']").collapse('show');
+        });
+    
+    </script>
+</body>
+
+</html>
