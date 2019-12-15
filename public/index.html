@@ -10,7 +10,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
-        <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>医疗问诊</a>
+        <a class="navbar-brand" href="./index.html"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>医疗问诊</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -41,60 +41,38 @@
             <br>
 
             <form class="form-inline" style="width: 100%;">
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <select class="custom-select my-1 mr-sm-2" id="slect_type">
                     <option value="0" selected>筛选类别</option>
                     <option value="1">科室</option>
                     <option value="2">职称</option>
                 </select>
 
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                    <option value="0" selected>筛选类别</option>
+                <select class="custom-select my-1 mr-sm-2" id="select_secondary">
+                    <option value="0" selected>二级筛选</option>
                     <option value="1">科室</option>
                     <option value="2">疾病</option>
                     <option value="3">Three</option>
                 </select>
 
-                <button type="submit" class="btn btn-primary my-1">筛选</button>
+                <button id="slect_doc" class="btn btn-primary my-1">筛选</button>
             </form>
         </div>
 
-        <div class="card col-12 row">
-            <div class="row col-12">
-                <div class="card col-3">
-                    <div class="card-body">
-                        <h5 class="card-title">八意永琳</h5>
-                        <p>主攻方向：xxxxxx</p>
-                        <a href="#" class="btn btn-primary">在线咨询</a>
-                    </div>
-                </div>
+        <div class="card col-12 row" style="height: 35vh;">
+            <div id="doc_list" class="row col-12" style="height:35vh;overflow: scroll;overflow-x: hidden;">
 
                 <div class="card col-3">
                     <div class="card-body">
                         <h5 class="card-title">八意永琳</h5>
                         <p>主攻方向：xxxxxx</p>
-                        <a href="#" class="btn btn-primary">在线咨询</a>
+                        <a dataid=1 href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
                     </div>
                 </div>
-                <div class="card col-3">
-                    <div class="card-body">
-                        <h5 class="card-title">八意永琳</h5>
-                        <p>主攻方向：xxxxxx</p>
-                        <a href="#" class="btn btn-primary">在线咨询</a>
-                    </div>
-                </div>
-                <div class="card col-3">
-                    <div class="card-body">
-                        <h5 class="card-title">八意永琳</h5>
-                        <p>主攻方向：xxxxxx</p>
-                        <a href="#" class="btn btn-primary">在线咨询</a>
-                    </div>
-                </div>
-
 
             </div>
         </div>
 
-        <div class="col-12" style="height: 2rem;"></div>
+        <div class="col-12" style="height: 1rem;"></div>
 
         <div class="card col-12 row">
 
@@ -105,20 +83,17 @@
             <br>
 
             <form class="form-inline" style="width: 100%;">
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <select  class="custom-select my-1 mr-sm-2" id="select_prov">
                     <option value="0" selected>省</option>
-                    <option value="1">科室</option>
-                    <option value="2">职称</option>
+                    <option value="1">四川</option>
                 </select>
 
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <select class="custom-select my-1 mr-sm-2" id="select_city">
                     <option value="0" selected>市</option>
-                    <option value="1">科室</option>
-                    <option value="2">疾病</option>
-                    <option value="3">Three</option>
+                    <option value="1">成都</option>
                 </select>
 
-                <button type="submit" class="btn btn-primary my-1">筛选</button>
+                <button id="selec_hospital" class="btn btn-primary my-1">筛选</button>
             </form>
 
 
@@ -131,11 +106,21 @@
 
                         <div class="home-hospital-container" style="display: inline-block;">
                             <div class="home-hospital-container-item">
-                                <div class="list-contain">
-                                    <ul class="list-contain-ul">
-                                        <li><a class="hospital" href="#">11111111111111</a></li>
-                                        <li><a class="hospital" href="#">11111111111111</a></li>
-                                    </ul>
+                                <div class="list-contain" style="height:10vhrem;" >
+                                    <ul class="list-contain-ul row" id="hospital_list" style="height: 10vh;overflow-y: scroll;overflow-x: hidden;" >
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+
                                 </div>
                             </div>
                         </div>
@@ -144,19 +129,168 @@
             </div>
         </div>
 
-        <div class="col-12" style="height: 2rem;"></div>
-
     </main>
 
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.bundle.js"></script>
+    <script>
+
+        let docFilter={
+            type:[],
+            second:[]
+        };
+        let hosFilter={
+            prov:[],
+            city:[]
+        };
+
+        axios.post('/getdocfilter',null)
+        .then(res => {
+
+            console.log(res)
+        })
+        .catch(err => {
+            alert("初始化筛选列表失败");
+            console.error(err); 
+        })
+
+        axios.post('/gethosfilter',null)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.error(err); 
+        })
+
+
+    </script>
     <script>
         $(".collapse-open").click(function () {
             $(".collapse").collapse('hide');
             let id = $(this).attr('for');
             $(".collapse[id=\'" + id + "\']").collapse('show');
         });
-    
+
+        let doc_list=$("#doc_list")[0];
+        let hos_list=$("#hospital_list")[0];
+
+        function MakeUpOption(v,c){
+            //<option value="1">科室</option>
+            let option=document.createElement('option');
+            option.value=v;
+            option.innerText=c;
+            return option;
+        }
+
+        function MakeUpDocCard(name,main,id){
+            let temp=document.createElement('div');
+            temp.className="card col-3";
+            temp.innerHTML= '<div class="card-body">'+
+                                '<h5 class="card-title">'+name+'</h5>'+
+                                '<p>'+main+'</p>'+
+                                '<a dataid='+id+' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>'+
+                            '</div>'
+            return temp;
+        }
+
+        function MakeUpHostpital(name,data){
+//<li class="col-4" style="float: left;"><a class="hospital" data="xxx"  href="#">11111111111111</a></li>
+            let li=document.createElement('li');
+            li.className="col-4";
+            li.style.setProperty('float','left');
+            li.innerHTML='<a class="hospital" onclick="showhos(this)" data='+data+'  href="#">'+name+'</a>';
+            return li;
+        }
+
+        function ClearList(el){
+            el.innerHTML='';
+        }
+
+        function askme(el){
+            let id=el.getAttribute("dataid");
+            sessionStorage.setItem('docid',id);
+            window.location.href="./doctors.html";
+        }
+
+
+    </script>
+
+    <script>
+        $("#slect_doc").click(()=>{
+            let type=$("#slect_type")[0].value;
+            let second=$("#select_secondary")[0].value;
+            console.log(type);
+            console.log(second);
+            if(type=='0'||second=='0'){
+                alert("请选择完整筛选条件");
+            }else{
+                axios.post('/selectdoctor',{
+                    type:type,
+                    second:second
+                })
+                .then(res => {
+                    console.log(res.data);
+                    let data=res.data;
+                    ClearList(doc_list);
+                    if(data.length<=0){
+                        alert("未能查询到数据")
+                    }else{
+                        for(let i=0;i<data.lenght;i++){
+                            let t=data[i];
+                            doc_list.appendChild(MakeUpDocCard(t.name,t.main,t.id));
+                        }
+                    }
+                })
+                .catch(err => {
+                    alert("出错，查看控制台");
+                    console.error(err); 
+                })
+            }
+        });
+
+        $("#selec_hospital").click(()=>{
+            let prov=$("#select_prov")[0].value;
+            let city=$("#select_city")[0].value;
+            if(prov=='0'||city=='0'){
+                alert("请选择完整筛选条件");
+            }else{
+                console.log(prov);
+                console.log(city);
+                axios.post('/selecthospital',{
+                    prov:prov,
+                    city:city
+                })
+                .then(res => {
+                    console.log(res.data);
+                    let data=res.data;
+                    ClearList(hos_list);
+                    if(data.length<=0){
+                        alert("未能找到数据");
+                    }else{
+
+                    }
+                })
+                .catch(err => {
+                    alert("发生错误，查看控制台")
+                    console.error(err); 
+                })
+            }
+        });
+    </script>
+
+
+
+
+    <script>
+        //test
+        ClearList(doc_list);
+        for(let i=0;i<20;i++){
+            doc_list.appendChild(MakeUpDocCard("八意永琳","毒药",i));
+        }
+        ClearList(hos_list);
+        for(let i=0;i<50;i++){
+            hos_list.appendChild(MakeUpHostpital("永远亭医院","医院"))
+        }
     </script>
 </body>
 
