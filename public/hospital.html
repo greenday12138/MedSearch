@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>医院详情</title>
+    <link rel="stylesheet" href="./lib/bootstrap.css">
+    <link rel="stylesheet" href="lib/fonts/iconfont.css">
+    <link rel="stylesheet" href="./src/style.css">
+    <script src="lib/axios.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+        <a class="navbar-brand" href="./index.html"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>医院详情</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="疾病/医生/医院" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="col-12" style="height: 3rem;"></div>
+
+    <main class="row" style="width: 80%;margin: auto;">
+        <div class="col-12" style="height: 1rem;"></div>
+        <div class="card col-12">
+            <div class="card-header">
+                医院档案
+            </div>
+            <div class="card-body">
+                <img style="width: 200px;height: 150px;" src="src/img/hospital.jpg">
+                <h5 class="card-title">永远亭医院</h5>
+                <p class="card-text">主攻方向</p>
+                <p class="card-text">科室</p>
+                <p class="card-text">职称</p>
+                <p class="card-text">详细介绍</p>
+                <p class="card-text">论文列表</p>
+                
+                <a href="#" class="btn btn-primary">在线求助</a>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="lib/jquery.js"></script>
+    <script src="lib/bootstrap.bundle.js"></script>
+    <script>
+        $(".collapse-open").click(function () {
+            $(".collapse").collapse('hide');
+            let id = $(this).attr('for');
+            $(".collapse[id=\'" + id + "\']").collapse('show');
+        });
+    </script>
+</body>
+
+</html>
