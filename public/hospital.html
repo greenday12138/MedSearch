@@ -76,6 +76,8 @@
             setInfo(res.data);
         })
         .catch(err => {
+            alert("不存在这个医院");
+                window.location.href="index.html";
             console.error(err); 
         });
 
