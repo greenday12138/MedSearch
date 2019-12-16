@@ -1663,8 +1663,8 @@
                 alert("请选择完整筛选条件");
             }else{
                 axios.post('/selectdoctor',{
-                    political:type,
-                    faculty:second
+                    political:second,
+                    faculty:type
                 })
                     .then(res => {
                         console.log(res.data);
@@ -1699,7 +1699,7 @@
                     city: city
                 })
                     .then(res => {
-                        console.log(res.data);
+                        console.log(JSON.parse(res));
                         let data = res.data;
                         ClearList(hos_list);
                         if (data.length <= 0) {

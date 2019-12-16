@@ -10,8 +10,8 @@ router.get('/', function (req, res, next) {
 router.post('/selectdoctor', function (req, res, next) {
   console.log(req.body);
   var sql = {
-    sql: 'select (doctor_id,doctor_name,doctor_profession) from `doctor` where doctor_political= ? and doctor_faculty= ?',
-    values: [req.body.political, req.body.faculty]
+    sql: 'select (doctor_id,name_ch,doctor_profession) from `doctor` natural join `name` where doctor_political= ? and doctor_faculty= ?',
+    values: [req.body.faculty, req.body.political]
   }
   db.DBConnection.getConnection(function (err, connection) {
     if (err) {
