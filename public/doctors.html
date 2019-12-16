@@ -64,7 +64,8 @@
     <script>
         function SetInfo(data) {
             $("#name")[0].innerText="";
-            $("#exper")[0]
+            $("#exper")[0].innerText="";
+            
         }
         let name = sessionStorage.getItem('docid');
         axios.post('/getdocinfo', {
