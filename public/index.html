@@ -1669,11 +1669,12 @@
                 })
                     .then(res => {
                         let data = res.data;
+                        console.log(data);
                         ClearList(doc_list);
                         if (data.length <= 0) {
                             alert("未能查询到数据")
                         } else {
-                            for (let i = 0; i < data.lenght; i++) {
+                            for (let i = 0; i < data.length; i++) {
                                 let t = data[i];
                                 doc_list.appendChild(MakeUpDocCard(t.name, t.main, t.id));
                             }
