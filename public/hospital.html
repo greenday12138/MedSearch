@@ -18,10 +18,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="疾病/医生/医院" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-            </form>
+            
         </div>
     </nav>
 
@@ -36,11 +33,11 @@
             <div class="card-body">
                 <img style="width: 200px;height: 150px;" src="src/img/hospital.jpg">
                 <h5 id="name" class="card-title">永远亭医院</h5>
-                <p id="" class="card-text">主攻方向</p>
-                <p class="card-text">科室</p>
-                <p class="card-text">职称</p>
-                <p class="card-text">详细介绍</p>
-                <p class="card-text">论文列表</p>
+                <p id="class" class="card-text">等级</p>
+                <p id="address" class="card-text">地址</p>
+                <p id="intro" class="card-text">介绍</p>
+                <p id="city" class="card-text">城市</p>
+                <p id="prov" class="card-text">省份</p>
                 
                 <a href="#" class="btn btn-primary">访问官网</a>
             </div>
@@ -61,7 +58,12 @@
     <script>
 
         function setInfo(data){
-
+            $("#name")[0].innerText=data.hospital_name;
+            $("#class")[0].innerText=data.hospital_class;
+            $("#address")[0].innerText=data.hospital_address;
+            $("#intro")[0].innerText=data.hospital_introduction;
+            $("#city")[0].innerText=data.city_name;
+            $("#prov")[0].innerText=data.city_province;
         }
 
         let key=sessionStorage.getItem('hosid');

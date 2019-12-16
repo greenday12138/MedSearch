@@ -56,8 +56,8 @@
             </form>
         </div>
 
-        <div class="card col-12 row" style="height: 35vh;">
-            <div id="doc_list" class="row col-12" style="height:35vh;overflow: scroll;overflow-x: hidden;">
+        <div class="card col-12 row" style="height: 30vh;">
+            <div id="doc_list" class="row col-12" style="height:30vh;overflow: scroll;overflow-x: hidden;">
 
                 <div class="card col-3">
                     <div class="card-body">
@@ -104,9 +104,9 @@
 
                         <div class="home-hospital-container" style="display: inline-block;">
                             <div class="home-hospital-container-item">
-                                <div class="list-contain" style="height:10vhrem;">
+                                <div class="list-contain" style="height:15vhrem;">
                                     <ul class="list-contain-ul row" id="hospital_list"
-                                        style="height: 10vh;overflow-y: scroll;overflow-x: hidden;">
+                                        style="height: 15vh;overflow-y: scroll;overflow-x: hidden;">
                                         <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
                                                 href="#">11111111111111</a></li>
                                         <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
@@ -1620,7 +1620,7 @@
             temp.className = "card col-3";
             temp.innerHTML = '<div class="card-body">' +
                 '<h5 class="card-title">' + name + '</h5>' +
-                '<p>' + main + '</p>' +
+                '<p style="overflow:hidden" >' + main + '</p>' +
                 '<a dataid=' + id + ' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>' +
                 '</div>'
             return temp;
@@ -1676,7 +1676,7 @@
                         } else {
                             for (let i = 0; i < data.length; i++) {
                                 let t = data[i];
-                                doc_list.appendChild(MakeUpDocCard(t.name, t.main, t.id));
+                                doc_list.appendChild(MakeUpDocCard(t.doctor_name, t.doctor_profession, t.doctor_id));
                             }
                         }
                     })
