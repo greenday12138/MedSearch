@@ -153,9 +153,10 @@
                     dlistb.className = "card card-body row";
                     //<a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
 
-                    for (let i = docs; i < docs.length; i++) {
-                        let l = documen.createElement('li');
+                    for (let i = 0; i < docs.length; i++) {
+                        let l = document.createElement('li');
                         let n = docs[i];
+                        console.log(n);
                         l.className = "col-3";
                         l.innerHTML = '<a onclick="askme(this)" dataid="' + n + '">' + n + '</a>';
                         dlistb.appendChild(l);

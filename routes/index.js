@@ -81,10 +81,10 @@ router.post('/getdocinfo', function (req, res, next) {
       return;
     }
     var sql = {
-      sql: 'select doctor_id,doctor_faculty, doctor_profession, doctor_political,doctor_expertise, doctor_description,' +
+      sql: 'select hospital_id,doctor_id,doctor_faculty, doctor_profession, doctor_political,doctor_expertise, doctor_description,' +
         'name.name_ch as name,pinying,full_surname,abbre_surname,full_firstname,abbre_firstname ' +
-        'from `doctor` natural join `name` where name_ch= ?',
-      values: [req.body.name_ch]
+        'from `doctor` natural join `name` where doctor_id= ?',
+      values: [req.body.did]
     }
     connection.query(sql, function (err, rows) {
       if (err) {
@@ -94,6 +94,7 @@ router.post('/getdocinfo', function (req, res, next) {
 
       var data = {};
       if (rows.length > 0) {
+        data.hospital_id=rows[0].hospital_id,
         data.doctor_id = rows[0].doctor_id;
         data.doctor_faculty = rows[0].doctor_faculty;
         data.doctor_profession = rows[0].doctor_profession;
@@ -194,7 +195,11 @@ router.post('/staffinfo', function (req, res, next) {
         {
           faculty:,
           doctor:[
-            '张小曼',' 何关忠'
+            {
+              name:,
+              id:
+            }
+            ...
           ]
         },
         {...}
@@ -204,19 +209,28 @@ router.post('/staffinfo', function (req, res, next) {
       if (rows.length > 0) {
         var buffer = {
           faculty: rows[0].doctor_faculty,
-          doctor: [rows[0].name_ch]
+          doctor: [{
+            name:rows[0].name_ch,
+            id:rows[0].doctor_id
+          }]
         };
         for (var i = 0, max = rows.length; i < max; ++i) {
           var item = {
             faculty: rows[i].doctor_faculty,
-            doctor: [rows[i].name_ch]
+            doctor: [{
+              name:rows[0].name_ch,
+              id:rows[0].doctor_id
+            }]
           }
           if (item.faculty != buffer.faculty) {
             data.push(buffer);
             buffer=item;
           } else{
             if(i!=0){
-              buffer.doctor.push(rows[i].name_ch);
+              buffer.doctor.push({
+                name:rows[0].name_ch,
+                id:rows[0].doctor_id
+              });
             }
           
           }
