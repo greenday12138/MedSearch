@@ -81,9 +81,9 @@ router.post('/getdocinfo', function (req, res, next) {
       return;
     }
     var sql = {
-      sql: 'select doctor_id,doctor_faculty, doctor_profession, doctor_political,doctor_expertise, doctor_description' +
-        'name.name_ch as name,pinying,full_surmane,abbre_surname,full_firstname,abbre_firstname' +
-        'from `doctor` natural join `name` where doctor.name_ch= ?',
+      sql: 'select doctor_id,doctor_faculty, doctor_profession, doctor_political,doctor_expertise, doctor_description,' +
+        'name.name_ch as name,pinying,full_surname,abbre_surname,full_firstname,abbre_firstname ' +
+        'from `doctor` natural join `name` where name_ch= ?',
       values: [req.body.name_ch]
     }
     connection.query(sql, function (err, rows) {
@@ -100,7 +100,7 @@ router.post('/getdocinfo', function (req, res, next) {
         doctor_description: rows[0].doctor_description,
         name_ch: rows[0].name,
         pinying: rows[0].pinying,
-        full_surmane: rows[0].full_surmane,
+        full_surmane: rows[0].full_surname,
         abbre_surname: rows[0].abbre_surname,
         full_firstname: rows[0].full_firstname,
         abbre_firstname: rows[0].abbre_firstname
