@@ -1587,11 +1587,17 @@
         }
         
         $("#select_prov").change(()=>{
+            console.log('change')
             let prov =$("#select_prov")[0].value;
+            console.log(prov);
             $("#select_city")[0].innerHTML='';
             $("#select_city")[0].appendChild(MakeUpOption(0,"市"));
-            for(let i=0;i<hosFilter.city;i++){
-                //let t=hosFilter
+            for(let i=0;i<hosFilter.city.length;i++){
+                let t=hosFilter.city[i];
+                if(t.prov==prov){
+                    
+                    $("#select_city")[0].appendChild(MakeUpOption(t.city,t.city));
+                }
             }
         });
 
