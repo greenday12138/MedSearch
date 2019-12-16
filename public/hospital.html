@@ -35,14 +35,14 @@
             </div>
             <div class="card-body">
                 <img style="width: 200px;height: 150px;" src="src/img/hospital.jpg">
-                <h5 class="card-title">永远亭医院</h5>
-                <p class="card-text">主攻方向</p>
+                <h5 id="name" class="card-title">永远亭医院</h5>
+                <p id="" class="card-text">主攻方向</p>
                 <p class="card-text">科室</p>
                 <p class="card-text">职称</p>
                 <p class="card-text">详细介绍</p>
                 <p class="card-text">论文列表</p>
                 
-                <a href="#" class="btn btn-primary">在线求助</a>
+                <a href="#" class="btn btn-primary">访问官网</a>
             </div>
         </div>
 
@@ -59,7 +59,24 @@
     </script>
 
     <script>
-        
+
+        function setInfo(data){
+
+        }
+
+        let key=sessionStorage.getItem('hosid');
+
+        axios.post('gethosinfo',{
+            id:key
+        })
+        .then(res => {
+            console.log(res);
+            setInfo(res.data);
+        })
+        .catch(err => {
+            console.error(err); 
+        });
+
     </script>
 </body>
 

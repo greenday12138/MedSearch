@@ -42,16 +42,13 @@
 
             <form class="form-inline" style="width: 100%;">
                 <select class="custom-select my-1 mr-sm-2" id="slect_type">
-                    <option value="0" selected>筛选类别</option>
-                    <option value="1">科室</option>
-                    <option value="2">职称</option>
+                    <option value="0" selected>科室</option>
+                    
                 </select>
 
                 <select class="custom-select my-1 mr-sm-2" id="select_secondary">
-                    <option value="0" selected>二级筛选</option>
-                    <option value="1">科室</option>
-                    <option value="2">疾病</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>职称</option>
+                    
                 </select>
 
                 <button id="slect_doc" class="btn btn-primary my-1">筛选</button>
@@ -136,23 +133,37 @@
     <script>
 
         let docFilter={
-            type:[],
-            second:[]
+            type:[
+                    "心血管内科","神经内科","骨内科","消化内科","血液科","风湿免疫科","呼吸内科",
+                    "骨科","心胸外科","泌尿外科","肛肠外科","乳腺外科","肝胆外科","普外科","神经外科","血管外科",
+                    "妇科","产科","小儿内科","小儿外科","新生儿科"],
+            second:["主任","副主任","院长","副院长"]
         };
+
         let hosFilter={
             prov:[],
             city:[]
         };
 
-        axios.post('/getdocfilter',null)
-        .then(res => {
+        function MakeUpOption(v,c){
+            //<option value="1">科室</option>
+            let option=document.createElement('option');
+            option.value=v;
+            option.innerText=c;
+            return option;
+        }
 
-            console.log(res)
-        })
-        .catch(err => {
-            alert("初始化筛选列表失败");
-            console.error(err); 
-        })
+        for(let i=0;i<docFilter.type.length;i++){
+            let d=docFilter.type[i];
+            let type= MakeUpOption(d,d);
+            $("#slect_type")[0].appendChild(type);
+        }
+
+        for(let i=0;i<docFilter.second.length;i++){
+            let d=docFilter.second[i];
+            let sec=MakeUpOption(d,d);
+            $("#select_secondary")[0].appendChild(sec);
+        }
 
         axios.post('/gethosfilter',null)
         .then(res => {
@@ -174,13 +185,7 @@
         let doc_list=$("#doc_list")[0];
         let hos_list=$("#hospital_list")[0];
 
-        function MakeUpOption(v,c){
-            //<option value="1">科室</option>
-            let option=document.createElement('option');
-            option.value=v;
-            option.innerText=c;
-            return option;
-        }
+        
 
         function MakeUpDocCard(name,main,id){
             let temp=document.createElement('div');
@@ -288,14 +293,14 @@
 
     <script>
         //test
-        ClearList(doc_list);
-        for(let i=0;i<20;i++){
-            doc_list.appendChild(MakeUpDocCard("八意永琳","毒药",i));
-        }
-        ClearList(hos_list);
-        for(let i=0;i<50;i++){
-            hos_list.appendChild(MakeUpHostpital("永远亭医院","医院"))
-        }
+        // ClearList(doc_list);
+        // for(let i=0;i<20;i++){
+        //     doc_list.appendChild(MakeUpDocCard("八意永琳","毒药",i));
+        // }
+        // ClearList(hos_list);
+        // for(let i=0;i<50;i++){
+        //     hos_list.appendChild(MakeUpHostpital("永远亭医院","医院"))
+        // }
     </script>
 </body>
 
