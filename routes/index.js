@@ -115,9 +115,9 @@ router.post('/getdocinfo', function (req, res, next) {
           var ar = [];
           for (var j = 0, mx = re.length; j < mx; ++j) {
             ar.push({
-              article_id: re[i].article_id,
-              author_order: re[i].author_order,
-              department: re[i].department
+              article_id: re[j].article_id,
+              author_order: re[j].author_order,
+              department: re[j].department
             })
           }
           data.articles = ar;
@@ -138,8 +138,8 @@ router.post('/gethosinfo', function (req, res, next) {
       console.error(err);
       return;
     }
-    connection.query('select * from `hospital` natural join `city` where hospital_id=?',
-      [req.body.id], function (err, rows) {
+    connection.query('select * from `hospital` natural join `city` where hospital_name=?',
+      [req.body.name], function (err, rows) {
         if (err) {
           console.error(err);
           return;

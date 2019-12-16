@@ -19,7 +19,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0">
-                <input id="tosearch" class="form-control mr-sm-2" type="search" placeholder="疾病/医生/医院" aria-label="Search">
+                <input id="tosearch" class="form-control mr-sm-2" type="search" placeholder="医生/医院" aria-label="Search">
                 <button id="search" class="btn btn-outline-success my-2 my-sm-0">搜索</button>
             </form>
         </div>
@@ -61,9 +61,41 @@
 
                 <div class="card col-3">
                     <div class="card-body">
-                        <h5 class="card-title">八意永琳</h5>
-                        <p>主攻方向：xxxxxx</p>
-                        <a dataid=1 href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
+                        <h5 class="card-title">张庆光</h5>
+                        <p>心肺复苏、急慢性呼吸衰竭</p>
+                        <a dataid="张庆光" href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">姜枋进</h5>
+                        <p>老年多发病常见病及疑难杂症病</p>
+                        <a dataid='姜枋进' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">于鉴筠</h5>
+                        <p>骨折的手法整复及开放性损伤/脊椎损伤</p>
+                        <a dataid='于鉴筠' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">于长青</h5>
+                        <p>CT影像与诊断</p>
+                        <a dataid="于长青s" href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">亓健</h5>
+                        <p>胃肠道疾病以及消化外科各种疑难重症的诊治</p>
+                        <a dataid="亓健" href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
                     </div>
                 </div>
 
@@ -107,30 +139,28 @@
                                 <div class="list-contain" style="height:15vhrem;">
                                     <ul class="list-contain-ul row" id="hospital_list"
                                         style="height: 15vh;overflow-y: scroll;overflow-x: hidden;">
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
-                                        <li class="col-4" style="float: left;"><a class="hospital" data="xxx"
-                                                href="#">11111111111111</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="钦州市中医院"
+                                                href="#">钦州市中医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="南丰县人民医院"
+                                                href="#">南丰县人民医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="苏州市广济医院"
+                                                href="#">苏州市广济医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="安庆市石化医院"
+                                                href="#">安庆市石化医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="海军总医院"
+                                                href="#">海军总医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="逊克县人民医院"
+                                                href="#">逊克县人民医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="绵阳肿瘤医院"
+                                                href="#">绵阳肿瘤医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="吉林大学第二医院"
+                                                href="#">吉林大学第二医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="怀远县人民医院"
+                                                href="#">怀远县人民医院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="荆门市妇幼保健院"
+                                                href="#">荆门市妇幼保健院</a></li>
+                                        <li class="col-4" style="float: left;"><a onclick="showhos(this)" class="hospital" dataid="翼城县人民医院"
+                                                href="#">翼城县人民医院</a></li>
 
                                 </div>
                             </div>
@@ -1710,7 +1740,7 @@
                             //hos_list.innerHTML="";
                             for (let i = 0; i < data.length; i++) {
                                 let hos = data[i];
-                                hos_list.appendChild(MakeUpHostpital(hos.hospital_name,hos.hospital_id));
+                                hos_list.appendChild(MakeUpHostpital(hos.hospital_name,hos.hospital_name));
                             }
                         }
                     })
@@ -1727,7 +1757,7 @@
             if(tosearch.length<=0){
                 alert("请键入需要查找的内容");
             }else{
-                if(tosearch.includes(医院)){
+                if(tosearch.includes('医院')){
                     sessionStorage.setItem('hosid', tosearch);
                     window.location.href = "./hospital.html";
                 }else{
@@ -1747,10 +1777,10 @@
         // for(let i=0;i<20;i++){
         //     doc_list.appendChild(MakeUpDocCard("八意永琳","毒药",i));
         // }
-        ClearList(hos_list);
-        for (let i = 0; i < 50; i++) {
-            hos_list.appendChild(MakeUpHostpital("永远亭医院", "医院"))
-        }
+        // ClearList(hos_list);
+        // for (let i = 0; i < 50; i++) {
+        //     hos_list.appendChild(MakeUpHostpital("永远亭医院", "医院"))
+        // }
     </script>
 </body>
 
