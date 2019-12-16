@@ -92,6 +92,8 @@
 
         function askme(el) {
             let name = el.getAttribute("dataid");
+            let id=el.getAttribute('tid');
+            sessionStorage.setItem('did',id);
             sessionStorage.setItem('docid', name);
             window.location.href = "./doctors.html";
         }
@@ -158,7 +160,7 @@
                         let n = docs[i];
                         console.log(n);
                         l.className = "col-3";
-                        l.innerHTML = '<a onclick="askme(this)" dataid="' + n + '">' + n + '</a>';
+                        l.innerHTML = '<a onclick="askme(this)" tid='+n.id+' dataid="' + n.name + '">' + n + '</a>';
                         dlistb.appendChild(l);
                     }
                     dlist.appendChild(dlistb);

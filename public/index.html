@@ -1649,7 +1649,7 @@
             temp.innerHTML = '<div class="card-body">' +
                 '<h5 class="card-title">' + name + '</h5>' +
                 '<p style="overflow:hidden" >' + main + '</p>' +
-                '<a dataid=' + name + ' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>' +
+                '<a tid='+id+' dataid=' + name + ' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>' +
                 '</div>'
             return temp;
         }
@@ -1669,6 +1669,8 @@
 
         function askme(el) {
             let name = el.getAttribute("dataid");
+            let id=el.getAttribute('tid');
+            sessionStorage.setItem('did',id);
             sessionStorage.setItem('docid', name);
             window.location.href = "./doctors.html";
         }
