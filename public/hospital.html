@@ -160,7 +160,7 @@
                         let n = docs[i];
                         console.log(n);
                         l.className = "col-3";
-                        l.innerHTML = '<a onclick="askme(this)" tid='+n.id+' dataid="' + n.name + '">' + n + '</a>';
+                        l.innerHTML = '<a onclick="askme(this)" tid='+n.id+' dataid="' + n.name + '">' + n.name + '</a>';
                         dlistb.appendChild(l);
                     }
                     dlist.appendChild(dlistb);

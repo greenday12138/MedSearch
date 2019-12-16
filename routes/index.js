@@ -32,7 +32,7 @@ router.post('/selectdoctor', function (req, res, next) {
           doctor_profession: rows[i].doctor_profession
         })
       }
-      //console.log(data);
+      console.log(data);
       res.json(data);
     })
 
@@ -180,7 +180,7 @@ router.post('/staffinfo', function (req, res, next) {
     }
 
     var sql = {
-      sql: 'select doctor_faculty,name_ch from `doctor` where hospital_id in ' +
+      sql: 'select doctor_id,doctor_faculty,name_ch from `doctor` where hospital_id in ' +
         '( select hospital_id from `hospital` where hospital_name= ? ) order by doctor_faculty',
       values: req.body.name
     }
@@ -218,8 +218,8 @@ router.post('/staffinfo', function (req, res, next) {
           var item = {
             faculty: rows[i].doctor_faculty,
             doctor: [{
-              name:rows[0].name_ch,
-              id:rows[0].doctor_id
+              name:rows[i].name_ch,
+              id:rows[i].doctor_id
             }]
           }
           if (item.faculty != buffer.faculty) {
@@ -228,8 +228,8 @@ router.post('/staffinfo', function (req, res, next) {
           } else{
             if(i!=0){
               buffer.doctor.push({
-                name:rows[0].name_ch,
-                id:rows[0].doctor_id
+                name:rows[i].name_ch,
+                id:rows[i].doctor_id
               });
             }
           

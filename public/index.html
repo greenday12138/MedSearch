@@ -59,7 +59,7 @@
         <div class="card col-12 row" style="height: 30vh;">
             <div id="doc_list" class="row col-12" style="height:30vh;overflow: scroll;overflow-x: hidden;">
 
-                <div class="card col-3">
+                <!-- <div class="card col-3">
                     <div class="card-body">
                         <h5 class="card-title">张庆光</h5>
                         <p>心肺复苏、急慢性呼吸衰竭</p>
@@ -97,7 +97,7 @@
                         <p>胃肠道疾病以及消化外科各种疑难重症的诊治</p>
                         <a dataid="亓健" href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -115,12 +115,12 @@
             <form class="form-inline" style="width: 100%;">
                 <select class="custom-select my-1 mr-sm-2" id="select_prov">
                     <option value="0" selected>省</option>
-                    <option value="1">四川</option>
+                    
                 </select>
 
                 <select class="custom-select my-1 mr-sm-2" id="select_city">
                     <option value="0" selected>市</option>
-                    <option value="1">成都</option>
+                    
                 </select>
 
                 <button id="selec_hospital" class="btn btn-primary my-1">筛选</button>
@@ -175,6 +175,7 @@
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.bundle.js"></script>
     <script>
+        
 
         let docFilter = {
             type: [
@@ -1634,11 +1635,33 @@
 
     </script>
     <script>
+        
         $(".collapse-open").click(function () {
             $(".collapse").collapse('hide');
             let id = $(this).attr('for');
             $(".collapse[id=\'" + id + "\']").collapse('show');
         });
+
+        function SaveState(){
+            let docstate=$("#doc_list")[0].innerHTML.toString();
+            let hosstate=$("#hospital_list")[0].innerHTML.toString();
+            sessionStorage.setItem('state',JSON.stringify({
+                doc:docstate,
+                hos:hosstate
+            }))
+        }
+
+        function LoadState(){
+            let state=sessionStorage.getItem('state');
+            if(state){
+                let s=JSON.parse(state);
+                $("#doc_list")[0].innerHTML=s.doc;
+                $("#hospital_list")[0].innerHTML=s.hos;
+            }else{
+                $("#doc_list")[0].innerHTML='';
+            }
+        }
+        LoadState();
 
         let doc_list = $("#doc_list")[0];
         let hos_list = $("#hospital_list")[0];
@@ -1672,12 +1695,14 @@
             let id=el.getAttribute('tid');
             sessionStorage.setItem('did',id);
             sessionStorage.setItem('docid', name);
+            SaveState();
             window.location.href = "./doctors.html";
         }
 
         function showhos(el) {
             let id = el.getAttribute("dataid");
             sessionStorage.setItem('hosid', id);
+            SaveState();
             window.location.href = "./hospital.html";
         }
 
@@ -1716,6 +1741,7 @@
                     })
             }
         });
+
 
         $("#selec_hospital").click((e) => {
             e.preventDefault();
@@ -1759,9 +1785,11 @@
             }else{
                 if(tosearch.includes('医院')){
                     sessionStorage.setItem('hosid', tosearch);
+                    SaveState();
                     window.location.href = "./hospital.html";
                 }else{
                     sessionStorage.setItem('docid',tosearch);
+                    SaveState();
                     window.location.href="./doctors.html";
                 }
             }
