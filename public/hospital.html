@@ -42,13 +42,18 @@
 
                 <hr>
                 <p>医资力量</p>
-                <ul class="list-group">
+                <ul class="list-group" id="docs">
                     <li for="1" class="list-group-item collapse-open">11111111111111111</li>
                     <div class="collapse" id="1">
-                        <div class="card card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
-                            ea proident.
+                        <div class="card card-body row">
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+                            <a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
                         </div>
                     </div>
                     <li for="2" class="list-group-item collapse-open">22222222222222222222</li>
@@ -96,6 +101,12 @@
 
     <script>
 
+        function askme(el) {
+            let name = el.getAttribute("dataid");
+            sessionStorage.setItem('docid', name);
+            window.location.href = "./doctors.html";
+        }
+
         function setInfo(data) {
             $("#name")[0].innerText = data.hospital_name;
             $("#class")[0].innerText = data.hospital_class;
@@ -115,9 +126,9 @@
         })
             .then(res => {
                 console.log(res.data);
-                
+
                 if (res.data) {
-                    setInfo(res.data);  
+                    setInfo(res.data);
                 } else {
                     alert("不存在这个医院");
                     window.location.href = "index.html";
@@ -129,6 +140,47 @@
                 window.location.href = "index.html";
                 console.error(err);
             });
+
+        $("#docs")[0].innerHTML = "";
+        axios.post('/staffinfo', {
+            name: key
+        })
+            .then(res => {
+                console.log(res);
+                let array = res.data;
+                for (let i = 0; i < array.length; i++) {
+                    let docs = array[i].doctor;
+                    let fac = array[i].faculty;
+                    //<li for="1" class="list-group-item collapse-open">11111111111111111</li>
+                    let li = document.createElement('li');
+                    li.className = "list-group-item collapse-open";
+                    li.innerText = fac;
+                    li.setAttribute("for", i);
+
+                    let dlist = document.createElement('div');
+                    dlist.className = "collapse";
+                    dlist.setAttribute('id', i);
+                    let dlistb = document.createElement('div');
+                    dlistb.className = "card card-body row";
+                    //<a onclick="askme(this)" class="col-3" dataid="xxx">xxx</a>
+
+                    for (let i = docs; i < docs.length; i++) {
+                        let l = documen.createElement('li');
+                        let n = docs[i];
+                        l.className = "col-3";
+                        l.innerHTML = '<a onclick="askme(this)" dataid="' + n + '">' + n + '</a>';
+                        dlistb.appendChild(l);
+                    }
+                    dlist.appendChild(dlistb);
+                    $("#docs")[0].appendChild(li);
+                    $("#docs")[0].appendChild(dlist);
+                }
+
+            })
+            .catch(err => {
+                alert("获取医生列表失败");
+                console.error(err);
+            })
 
     </script>
 </body>
