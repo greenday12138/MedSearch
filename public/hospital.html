@@ -66,11 +66,11 @@
 
         let key=sessionStorage.getItem('hosid');
 
-        axios.post('gethosinfo',{
+        axios.post('/gethosinfo',{
             id:key
         })
         .then(res => {
-            console.log(res);
+            console.log(res.data);
             setInfo(res.data);
         })
         .catch(err => {
