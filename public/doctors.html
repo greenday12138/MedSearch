@@ -66,7 +66,7 @@
     <script>
         let id=sessionStorage.getItem('docid');
         axios.post('/getdocinfo',{
-            id:id;
+            id:id
         })
         .then(res => {
             console.log(res);
