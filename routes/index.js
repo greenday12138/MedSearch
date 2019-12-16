@@ -73,8 +73,9 @@ router.post('/selecthospital', function (req, res, next) {
 })
 
 router.post('/getdocinfo', function (req, res, next) {
+  console.log(req.body);
   var sql = {
-    sql: 'select * from `doctor` natural join `name`'
+    sql: 'select doctor_id,name.name_ch as name,pinying, from `doctor` natural join `name`'
   }
 })
 
