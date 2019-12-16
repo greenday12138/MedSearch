@@ -3,3 +3,5 @@
 *.zip
 *.csv
 *.json
+data/getcity.js
+data/text.txt
