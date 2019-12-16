@@ -1591,7 +1591,7 @@
             let prov =$("#select_prov")[0].value;
             console.log(prov);
             $("#select_city")[0].innerHTML='';
-            $("#select_city")[0].appendChild(MakeUpOption(0,"市"));
+            $("#select_city")[0].appendChild(MakeUpOption(0,"请选择市"));
             for(let i=0;i<hosFilter.city.length;i++){
                 let t=hosFilter.city[i];
                 if(t.prov==prov){
