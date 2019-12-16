@@ -19,8 +19,8 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="疾病/医生/医院" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                <input id="tosearch" class="form-control mr-sm-2" type="search" placeholder="疾病/医生/医院" aria-label="Search">
+                <button id="search" class="btn btn-outline-success my-2 my-sm-0">搜索</button>
             </form>
         </div>
     </nav>
@@ -1621,7 +1621,7 @@
             temp.innerHTML = '<div class="card-body">' +
                 '<h5 class="card-title">' + name + '</h5>' +
                 '<p style="overflow:hidden" >' + main + '</p>' +
-                '<a dataid=' + id + ' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>' +
+                '<a dataid=' + name + ' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>' +
                 '</div>'
             return temp;
         }
@@ -1640,8 +1640,8 @@
         }
 
         function askme(el) {
-            let id = el.getAttribute("dataid");
-            sessionStorage.setItem('docid', id);
+            let name = el.getAttribute("dataid");
+            sessionStorage.setItem('docid', name);
             window.location.href = "./doctors.html";
         }
 
@@ -1718,6 +1718,22 @@
                         alert("发生错误，查看控制台")
                         console.error(err);
                     })
+            }
+        });
+
+        $("#search").click((e)=>{
+            e.preventDefault();
+            let tosearch=$("#tosearch")[0].value;
+            if(tosearch.length<=0){
+                alert("请键入需要查找的内容");
+            }else{
+                if(tosearch.includes(医院)){
+                    sessionStorage.setItem('hosid', tosearch);
+                    window.location.href = "./hospital.html";
+                }else{
+                    sessionStorage.setItem('docid',tosearch);
+                    window.location.href="./doctors.html";
+                }
             }
         });
     </script>

@@ -10,7 +10,8 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
-        <a class="navbar-brand" href="./index.html"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>医生详情</a>
+        <a class="navbar-brand" href="./index.html"> <span class="glyphicon glyphicon-plus"
+                aria-hidden="true"></span>医生详情</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,7 +19,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            
+
         </div>
     </nav>
 
@@ -37,13 +38,13 @@
                 <p id="factory" class="card-text">科室</p>
                 <p id="priority" class="card-text">职称</p>
                 <p id="description" class="card-text">详细介绍</p>
-                <p  class="card-text">论文列表</p>
+                <p class="card-text">论文列表</p>
                 <ul id="articles" class="list-group">
-                    <li >111111111111111111111111</li>
-                    <li >222222222222222222222222222</li>
-                    <li >33333333333333333333333333</li>
-                    <li >333333333333333333333333333</li>
-                    <li >4444444444444444444444444444</li>
+                    <li>111111111111111111111111</li>
+                    <li>222222222222222222222222222</li>
+                    <li>33333333333333333333333333</li>
+                    <li>333333333333333333333333333</li>
+                    <li>4444444444444444444444444444</li>
                 </ul>
                 <a href="#" class="btn btn-primary">在线求助</a>
             </div>
@@ -61,24 +62,25 @@
         });
     </script>
     <script>
-        let id=sessionStorage.getItem('docid');
-        axios.post('/getdocinfo',{
-            id:id
+        function SetInfo(data) {
+            $("#name")[0].innerText="";
+            $("#exper")[0]
+        }
+        let name = sessionStorage.getItem('docid');
+        axios.post('/getdocinfo', {
+            name_ch: name
         })
-        .then(res => {
-            console.log(res);
-            SetInfo(res.data);
-
-        })
-        .catch(err => {
-            console.error(err); 
-        })
+            .then(res => {
+                console.log(res);
+                SetInfo(res.data);
+            })
+            .catch(err => {
+                console.error(err);
+            })
     </script>
 
     <script>
-        function SetInfo(data){
 
-        }
     </script>
 </body>
 
