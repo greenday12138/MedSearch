@@ -73,7 +73,7 @@
             for(let i=0;i<article.length;i++){
                 let a=document.createElement('li');
                 a.innerText=article[i].department+" "+article[i].author_order+" "+article[i].article_id;
-                article.appendChild(a);
+               $("#articles")[0].appendChild(a);
             }
 
         }

@@ -91,20 +91,23 @@ router.post('/getdocinfo', function (req, res, next) {
         console.error(err);
         return;
       }
-      var data = {
-        doctor_id: rows[0].doctor_id,
-        doctor_faculty: rows[0].doctor_faculty,
-        doctor_profession: rows[0].doctor_profession,
-        doctor_political: rows[0].doctor_political,
-        doctor_expertise: rows[0].doctor_expertise,
-        doctor_description: rows[0].doctor_description,
-        name_ch: rows[0].name,
-        pinying: rows[0].pinying,
-        full_surmane: rows[0].full_surname,
-        abbre_surname: rows[0].abbre_surname,
-        full_firstname: rows[0].full_firstname,
-        abbre_firstname: rows[0].abbre_firstname
+
+      var data = {};
+      if (rows.length > 0) {
+        data.doctor_id = rows[0].doctor_id;
+        data.doctor_faculty = rows[0].doctor_faculty;
+        data.doctor_profession = rows[0].doctor_profession;
+        data.doctor_political = rows[0].doctor_political;
+        data.doctor_expertise = rows[0].doctor_expertise;
+        data.doctor_description = rows[0].doctor_description;
+        data.name_ch = rows[0].name;
+        data.pinying = rows[0].pinying;
+        data.full_surmane = rows[0].full_surname;
+        data.abbre_surname = rows[0].abbre_surname;
+        data.full_firstname = rows[0].full_firstname;
+        data.abbre_firstname = rows[0].abbre_firstname;
       }
+
       connection.query('select article_id,author_order,department from `article` where doctor_id= ?',
         data.doctor_id, function (err, re) {
           if (err) {
@@ -121,10 +124,10 @@ router.post('/getdocinfo', function (req, res, next) {
             })
           }
           data.articles = ar;
-        })
 
-      console.log(data);
-      res.json(data);
+          console.log(data);
+          res.json(data);
+        })
     })
     connection.release();
   })
@@ -144,19 +147,82 @@ router.post('/gethosinfo', function (req, res, next) {
           console.error(err);
           return;
         }
-        var data = {
-          hospital_id: rows[0].hospital_id,
-          hospital_name: rows[0].hospital_name,
-          hospital_class: rows[0].hospital_class,
-          hospital_address: rows[0].hospital_address,
-          hospital_introduction: rows[0].hospital_introduction,
-          city_name: rows[0].city_name,
-          city_province: rows[0].city_province
-        };
+        var data = {};
+        if (rows.length > 0) {
+          data.hospital_id = rows[0].hospital_id;
+          data.hospital_name = rows[0].hospital_name;
+          data.hospital_class = rows[0].hospital_class;
+          data.hospital_address = rows[0].hospital_address;
+          data.hospital_introduction = rows[0].hospital_introduction;
+          data.city_name = rows[0].city_name;
+          data.city_province = rows[0].city_province;
+        }
 
         console.log(data);
         res.json(data);
       })
+    connection.release();
+  })
+})
+
+router.post('/staffinfo', function (req, res, next) {
+  console.log(req.body);
+
+  db.DBConnection.getConnection(function (err, connection) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    var sql = {
+      sql: 'select doctor_faculty,name_ch from `doctor` where hospital_id in ' +
+        '( select hospital_id from `hospital` where hospital_name= ? ) order by doctor_faculty',
+      values: req.body.name
+    }
+    connection.query(sql, function (err, rows) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      var data = [];
+      /*
+      [
+        {
+          faculty:,
+          doctor:[
+            '张小曼',' 何关忠'
+          ]
+        },
+        {...}
+      ]
+      */
+     
+      if (rows.length > 0) {
+        var buffer = {
+          faculty: rows[0].doctor_faculty,
+          doctor: [rows[0].name_ch]
+        };
+        for (var i = 0, max = rows.length; i < max; ++i) {
+          var item = {
+            faculty: rows[i].doctor_faculty,
+            doctor: [rows[i].name_ch]
+          }
+          if (item.faculty != buffer.faculty) {
+            data.push(buffer);
+            buffer=item;
+          } else{
+            if(i!=0){
+              buffer.doctor.push(rows[i].name_ch);
+            }
+          
+          }
+        }
+      }
+
+      console.log(data);
+      res.json(data);
+    })
+
     connection.release();
   })
 })

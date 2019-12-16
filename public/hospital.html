@@ -39,7 +39,7 @@
                 <p id="city" class="card-text">城市</p>
                 <p id="prov" class="card-text">省份</p>
                 
-                <a href="#" class="btn btn-primary">访问官网</a>
+                <a id="info" class="btn btn-primary">医资力量</a>
             </div>
         </div>
 
@@ -53,6 +53,17 @@
             let id = $(this).attr('for');
             $(".collapse[id=\'" + id + "\']").collapse('show');
         });
+        $("#info").on('click',function(){
+            axios.post('/staffinfo',{
+                name:sessionStorage.getItem('hosid')
+            })
+                .then(res=>{
+                    console.log(res.data);
+                })
+                .catch(err=>{
+                    console.error(err);
+                })
+        })
     </script>
 
     <script>
