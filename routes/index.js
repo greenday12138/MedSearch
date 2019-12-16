@@ -4,12 +4,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  getLocation();
-  console.log('temp');
   res.sendFile('/index.html');
 });
 
 router.post('/selectdoctor', function (req, res, next) {
+  console.log(req.body);
   var sql = {
     sql: 'select (doctor_id,doctor_name,doctor_profession) from `doctor` where doctor_political= ? and doctor_faculty= ?',
     values: [req.body.political, req.body.faculty]
@@ -32,6 +31,7 @@ router.post('/selectdoctor', function (req, res, next) {
           doctor_profession: row[i].doctor_profession
         })
       }
+      console.log(data);
       res.json(data);
     })
 
@@ -40,8 +40,9 @@ router.post('/selectdoctor', function (req, res, next) {
 })
 
 router.post('/selecthospital', function (req, res, next) {
+  console.log(req.body);
   var sql = {
-    sql: 'select hospital_id,hospital_name from `hospital` natural join `city` where city_name= ?,city_province=?',
+    sql: 'select hospital_id,hospital_name from `hospital` natural join `city` where city_name= ? and city_province=?',
     values: [req.body.city, req.body.prov]
   };
   db.DBConnection.getConnection(function (err, connection) {
@@ -62,6 +63,7 @@ router.post('/selecthospital', function (req, res, next) {
         })
       }
 
+      console.log(data);
       res.json(data);
     })
 
