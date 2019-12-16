@@ -35,18 +35,18 @@
             </div>
             <div class="card-body">
                 <img src="src/img/avatar.jpg">
-                <h4 style="display: inline-block; width: 30%;" class="card-title">八意永琳</h4>
-                <p class="card-text">主攻方向</p>
-                <p class="card-text">科室</p>
-                <p class="card-text">职称</p>
-                <p class="card-text">详细介绍</p>
-                <p class="card-text">论文列表</p>
-                <ul class="list-group">
-                    <li class="list-group-item">111111111111111111111111</li>
-                    <li class="list-group-item">222222222222222222222222222</li>
-                    <li class="list-group-item">33333333333333333333333333</li>
-                    <li class="list-group-item">333333333333333333333333333</li>
-                    <li class="list-group-item">4444444444444444444444444444</li>
+                <h4 id="name" style="display: inline-block; width: 30%;" class="card-title">八意永琳</h4>
+                <p id="exper" class="card-text">主攻方向</p>
+                <p id="factory" class="card-text">科室</p>
+                <p id="priority" class="card-text">职称</p>
+                <p id="description" class="card-text">详细介绍</p>
+                <p  class="card-text">论文列表</p>
+                <ul id="articles" class="list-group">
+                    <li >111111111111111111111111</li>
+                    <li >222222222222222222222222222</li>
+                    <li >33333333333333333333333333</li>
+                    <li >333333333333333333333333333</li>
+                    <li >4444444444444444444444444444</li>
                 </ul>
                 <a href="#" class="btn btn-primary">在线求助</a>
             </div>
@@ -66,7 +66,7 @@
     <script>
         let id=sessionStorage.getItem('docid');
         axios.post('/getdocinfo',{
-            id:id
+            id:id;
         })
         .then(res => {
             console.log(res);
