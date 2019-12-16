@@ -1620,7 +1620,7 @@
             temp.className = "card col-3";
             temp.innerHTML = '<div class="card-body">' +
                 '<h5 class="card-title">' + name + '</h5>' +
-                '<p>' + main + '</p>' +
+                '<p style="overflow:hidden" >' + main + '</p>' +
                 '<a dataid=' + id + ' href="#" onclick="askme(this)" class="btn btn-primary">在线咨询</a>' +
                 '</div>'
             return temp;
@@ -1676,7 +1676,7 @@
                         } else {
                             for (let i = 0; i < data.length; i++) {
                                 let t = data[i];
-                                doc_list.appendChild(MakeUpDocCard(t.name, t.main, t.id));
+                                doc_list.appendChild(MakeUpDocCard(t.doctor_name, t.doctor_profession, t.doctor_id));
                             }
                         }
                     })
