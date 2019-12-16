@@ -73,9 +73,61 @@ router.post('/selecthospital', function (req, res, next) {
 })
 
 router.post('/getdocinfo', function (req, res, next) {
-  var sql = {
-    sql: 'select * from `doctor` natural join `name`'
-  }
+  console.log(req.body);
+
+  db.DBConnection.getConnection(function (err, connection) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    var sql = {
+      sql: 'select doctor_id,doctor_faculty, doctor_profession, doctor_political,doctor_expertise, doctor_description' +
+        'name.name_ch as name,pinying,full_surmane,abbre_surname,full_firstname,abbre_firstname' +
+        'from `doctor` natural join `name` where doctor.name_ch= ?',
+      values: [req.body.name_ch]
+    }
+    connection.query(sql, function (err, rows) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      var data = {
+        doctor_id: rows[0].doctor_id,
+        doctor_faculty: rows[0].doctor_faculty,
+        doctor_profession: rows[0].doctor_profession,
+        doctor_political: rows[0].doctor_political,
+        doctor_expertise: rows[0].doctor_expertise,
+        doctor_description: rows[0].doctor_description,
+        name_ch: rows[0].name,
+        pinying: rows[0].pinying,
+        full_surmane: rows[0].full_surmane,
+        abbre_surname: rows[0].abbre_surname,
+        full_firstname: rows[0].full_firstname,
+        abbre_firstname: rows[0].abbre_firstname
+      }
+      connection.query('select article_id,author_order,department from `article` where doctor_id= ?',
+        data.doctor_id, function (err, re) {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log(re);
+          var ar = [];
+          for (var j = 0, mx = re.length; j < mx; ++j) {
+            ar.push({
+              article_id: re[i].article_id,
+              author_order: re[i].author_order,
+              department: re[i].department
+            })
+          }
+          data.articles = ar;
+        })
+
+      console.log(data);
+      res.json(data);
+    })
+    connection.release();
+  })
 })
 
 router.post('/gethosinfo', function (req, res, next) {
@@ -101,7 +153,7 @@ router.post('/gethosinfo', function (req, res, next) {
           city_name: rows[0].city_name,
           city_province: rows[0].city_province
         };
-        
+
         console.log(data);
         res.json(data);
       })
