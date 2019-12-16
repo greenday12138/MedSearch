@@ -63,9 +63,19 @@
     </script>
     <script>
         function SetInfo(data) {
-            $("#name")[0].innerText="";
-            $("#exper")[0].innerText="";
-            
+            $("#name")[0].innerText=data.name_ch;
+            $("#exper")[0].innerText=data.doctor_expertise;
+            $("#factory")[0].innerText=data.doctor_faculty;
+            $("#priority")[0].innerText=data.doctor_political;
+            $("#description")[0].innerText=data.doctor_description;
+            $("#articles")[0].innerHTML="";
+            let article=data.articles;
+            for(let i=0;i<article.length;i++){
+                let a=document.createElement('li');
+                a.innerText=article[i].department+" "+article[i].author_order+" "+article[i].article_id;
+                article.appendChild(a);
+            }
+
         }
         let name = sessionStorage.getItem('docid');
         axios.post('/getdocinfo', {
