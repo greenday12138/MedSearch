@@ -1707,7 +1707,11 @@
                         if (data.length <= 0) {
                             alert("未能找到数据");
                         } else {
-
+                            hos_list.innerHTML="";
+                            for(let i=0;i<data.lenght;i++){
+                                let hos=data[i];
+                                hos_list.appendChild(MakeUpHostpital(hos.hospital_name,hos.hospital_id));
+                            }
                         }
                     })
                     .catch(err => {
