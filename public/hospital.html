@@ -10,7 +10,8 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
-        <a class="navbar-brand" href="./index.html"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>医院详情</a>
+        <a class="navbar-brand" href="./index.html"> <span class="glyphicon glyphicon-plus"
+                aria-hidden="true"></span>医院详情</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,7 +19,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            
+
         </div>
     </nav>
 
@@ -30,7 +31,7 @@
             <div class="card-header">
                 医院档案
             </div>
-            <div class="card-body">
+            <div class="card-body" style="display: none;">
                 <img style="width: 200px;height: 150px;" src="src/img/hospital.jpg">
                 <h5 id="name" class="card-title">永远亭医院</h5>
                 <p id="class" class="card-text">等级</p>
@@ -38,8 +39,29 @@
                 <p id="intro" class="card-text">介绍</p>
                 <p id="city" class="card-text">城市</p>
                 <p id="prov" class="card-text">省份</p>
-                
-                <a href="#" class="btn btn-primary">访问官网</a>
+
+                <hr>
+                <p>医资力量</p>
+                <ul class="list-group">
+                    <li for="1" class="list-group-item collapse-open">11111111111111111</li>
+                    <div class="collapse" id="1">
+                        <div class="card card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                      </div>
+                    <li for="2" class="list-group-item collapse-open">22222222222222222222</li>
+                    <div class="collapse" id="2">
+                        <div class="card card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                      </div>
+                    <li for="3" class="list-group-item collapse-open">33333333333333333333333</li>
+                    <div class="collapse" id="3">
+                        <div class="card card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                      </div>
+                </ul>
             </div>
         </div>
 
@@ -57,29 +79,38 @@
 
     <script>
 
-        function setInfo(data){
-            $("#name")[0].innerText=data.hospital_name;
-            $("#class")[0].innerText=data.hospital_class;
-            $("#address")[0].innerText=data.hospital_address;
-            $("#intro")[0].innerText=data.hospital_introduction;
-            $("#city")[0].innerText=data.city_name;
-            $("#prov")[0].innerText=data.city_province;
+        function setInfo(data) {
+            $("#name")[0].innerText = data.hospital_name;
+            $("#class")[0].innerText = data.hospital_class;
+            $("#address")[0].innerText = data.hospital_address;
+            $("#intro")[0].innerText = data.hospital_introduction;
+            $("#city")[0].innerText = data.city_name;
+            $("#prov")[0].innerText = data.city_province;
+            $("#info").show();
+
+            
         }
 
-        let key=sessionStorage.getItem('hosid');
+        let key = sessionStorage.getItem('hosid');
 
-        axios.post('/gethosinfo',{
-            id:key
+        axios.post('/gethosinfo', {
+            id: key
         })
-        .then(res => {
-            console.log(res.data);
-            setInfo(res.data);
-        })
-        .catch(err => {
-            alert("不存在这个医院");
-                window.location.href="index.html";
-            console.error(err); 
-        });
+            .then(res => {
+                console.log(res.data);
+                if(!res.data){
+                    alert("不存在这个医院");
+                window.location.href = "index.html";
+                }else{
+                    setInfo(res.data);
+                }
+                
+            })
+            .catch(err => {
+                alert("不存在这个医院");
+                window.location.href = "index.html";
+                console.error(err);
+            });
 
     </script>
 </body>
