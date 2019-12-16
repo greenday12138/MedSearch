@@ -86,17 +86,6 @@
             let id = $(this).attr('for');
             $(".collapse[id=\'" + id + "\']").collapse('show');
         });
-        $("#info").on('click', function () {
-            axios.post('/staffinfo', {
-                name: sessionStorage.getItem('hosid')
-            })
-                .then(res => {
-                    console.log(res.data);
-                })
-                .catch(err => {
-                    console.error(err);
-                })
-        })
     </script>
 
     <script>
@@ -175,7 +164,11 @@
                     $("#docs")[0].appendChild(li);
                     $("#docs")[0].appendChild(dlist);
                 }
-
+                $(".collapse-open").click(function () {
+                    $(".collapse").collapse('hide');
+                    let id = $(this).attr('for');
+                    $(".collapse[id=\'" + id + "\']").collapse('show');
+                });
             })
             .catch(err => {
                 alert("获取医生列表失败");
