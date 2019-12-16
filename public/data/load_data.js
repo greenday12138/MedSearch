@@ -1,6 +1,6 @@
 // var csv=require('csv');
 var fs = require('fs');
-//var mysql = require('mysql');
+var mysql = require('mysql');
 var path = require('path');
 var es = require('event-stream');
 var db = {
@@ -11,19 +11,78 @@ var db = {
     database: 'medic'
 }
 
-let DoctorArray=[]
-
 load_doctor();
 
-function load_doctor(){
-    //var connection=mysql.createConnection(db);
+function load_article() {
+    var db = {
+        connectLimit: 1000,
+        host: 'localhost',
+        port: 3306,
+        user: 'root',
+        password: 'root',
+        database: 'medic'
+    }
+    var pool = mysql.createPool(db);
 
-    let readStream=fs.createReadStream(path.join('./doctor.csv'),{
-        flags:'r',
-        encoding:'utf8'
+    let readStream = fs.createReadStream(path.join(__dirname, '../data/article.csv'), {
+        flags: 'r',
+        encoding: 'utf8'
+    })
+        .pipe(es.split())
+        .pipe(es.mapSync(function (li) {
+            readStream.pause();
+
+            var data = {};
+            var line = li.split(',');
+            var str = li.split('"');
+            if (str.length > 1) {
+                data.department = str[1];
+            } else {
+                data.department = line[2];
+            }
+            line.reverse();
+            data.article_id = line[2];
+            data.author_order = line[1];
+            data.doctor_id = line[0].split('A').pop();
+
+
+            pool.getConnection(function (err, connection) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                var sql = {
+                    sql: 'insert into `article`(article_id,author_order,doctor_id,department) ' +
+                        'values (?,?,?,?)',
+                    values: [data.article_id, data.author_order, data.doctor_id, data.department]
+                }
+                if (data.doctor_id.length === 8) {
+                    connection.query(sql, function (err, fields) {
+                        // When done with the connection, release it.
+                        connection.release();
+                        // Handle error after the release.
+                        if (err) {
+                            console.log(data);
+                            console.error(err);
+                            return;
+                        }
+                    })
+                }
+            })
+
+            readStream.resume();
+        }))
+}
+
+function load_doctor() {
+    var connection = mysql.createConnection(db);
+
+    let readStream = fs.createReadStream(path.join(__dirname, '../data/doctor.csv'), {
+        flags: 'r',
+        encoding: 'utf8'
     })
         .pipe(es.split(/\nMA/))
-        .pipe(es.mapSync(function(li){
+        .pipe(es.mapSync(function (li) {
             readStream.pause();
 
             var str=li;
@@ -45,7 +104,7 @@ function load_doctor(){
             while(currentState!=State.end){
                 if(index==str.length-1){
                     let s=str.slice(LP,index+1);
-                    console.log(s);
+                    //console.log(s);
                     array.push(s);
                     currentState=State.end;
                     break;
@@ -68,7 +127,7 @@ function load_doctor(){
                         }else if(c==','){
                             RP=index;
                             let s=str.slice(LP,RP);
-                            console.log(s);
+                            //console.log(s);
                             array.push(s);
                             currentState=State.dilimer;
                             index++;
@@ -106,7 +165,7 @@ function load_doctor(){
                         if(c==','){
                             RP=index;
                             let s=str.slice(LP,RP);
-                            console.log(s);
+                            //console.log(s);
                             array.push(s);
                             currentState=State.dilimer;
                             index++;
@@ -133,21 +192,31 @@ function load_doctor(){
                 HID:array[7].substring(4),
                 status:array[8]
             }
-            console.log(Item);
+            
             if(Item.DID=="DID"){
 
             }else{
-                DoctorArray.push(Item);
+                var sql={
+                    sql:'insert into `doctor`(doctor_id,doctor_faculty,doctor_profession,doctor_political,'+
+                        'doctor_expertise,doctor_description,doctor_status,hospital_id,name_ch) values(?,?,?,?,?,?,?,?,?)',
+                    values:[Item.DID,Item.faculty,Item.profession,Item.political,Item.expertise,Item.description,Item.status,Item.HID,Item.name]
+                }
+                connection.query(sql,function(err,fields){
+                    if(err){
+                        console.log(Item);
+                        console.error(err);
+                        return ;
+                    }
+                })
+                //DoctorArray.push(Item);
             }
-            //console.log(array);
-            console.log("==============================================")
-
+    
             readStream.resume();
         }))
 
-    fs.writeFileSync('doc.json',JSON.stringify(DoctorArray),{
-        encoding:"utf-8"
-    });
+    // fs.writeFileSync('doc.json',JSON.stringify(DoctorArray),{
+    //     encoding:"utf-8"
+    // });
 }
 
 // function load_hospital() {

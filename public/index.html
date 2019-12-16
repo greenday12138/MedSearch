@@ -1661,10 +1661,10 @@
             console.log(second);
             if (type == '0' || second == '0') {
                 alert("请选择完整筛选条件");
-            } else {
-                axios.post('/selectdoctor', {
-                    type: type,
-                    second: second
+            }else{
+                axios.post('/selectdoctor',{
+                    political:type,
+                    faculty:second
                 })
                     .then(res => {
                         console.log(res.data);
