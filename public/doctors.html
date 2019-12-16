@@ -31,9 +31,10 @@
             <div class="card-header">
                 医生档案
             </div>
-            <div class="card-body">
+            <div id="info" class="card-body" style="display: none;">
                 <img src="src/img/avatar.jpg">
                 <h4 id="name" style="display: inline-block; width: 30%;" class="card-title">八意永琳</h4>
+                <h5 id="name2" style="display: inline-block; width: 30%;">xxxxxxxxxxxxxxx</h5>
                 <p id="exper" class="card-text">主攻方向</p>
                 <p id="factory" class="card-text">科室</p>
                 <p id="priority" class="card-text">职称</p>
@@ -69,13 +70,14 @@
             $("#priority")[0].innerText=data.doctor_political;
             $("#description")[0].innerText=data.doctor_description;
             $("#articles")[0].innerHTML="";
+            $("#name2")[0].innerText=data.pinying+" "+data.full_surmane+" "+data.abbre_surname+" "+data.full_firstname+" "+data.abbre_firstname;
             let article=data.articles;
             for(let i=0;i<article.length;i++){
                 let a=document.createElement('li');
                 a.innerText=article[i].department+" "+article[i].author_order+" "+article[i].article_id;
                $("#articles")[0].appendChild(a);
             }
-
+            $("#info").show();
         }
         let name = sessionStorage.getItem('docid');
         axios.post('/getdocinfo', {
@@ -83,9 +85,18 @@
         })
             .then(res => {
                 console.log(res);
-                SetInfo(res.data);
+                if(res.data){
+                    SetInfo(res.data);
+                }else{
+                    alert("不存在这个医生");
+                window.location.href="index.html";
+                console.error(err);
+                }
+                
             })
             .catch(err => {
+                alert("不存在这个医生");
+                window.location.href="index.html";
                 console.error(err);
             })
     </script>
