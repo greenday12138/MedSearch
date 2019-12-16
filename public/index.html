@@ -1591,7 +1591,7 @@
             let prov =$("#select_prov")[0].value;
             console.log(prov);
             $("#select_city")[0].innerHTML='';
-            $("#select_city")[0].appendChild(MakeUpOption(0,"市"));
+            $("#select_city")[0].appendChild(MakeUpOption(0,"请选择市"));
             for(let i=0;i<hosFilter.city.length;i++){
                 let t=hosFilter.city[i];
                 if(t.prov==prov){
@@ -1654,7 +1654,8 @@
     </script>
 
     <script>
-        $("#slect_doc").click(() => {
+        $("#slect_doc").click((e) => {
+            e.preventDefault();
             let type = $("#slect_type")[0].value;
             let second = $("#select_secondary")[0].value;
             console.log(type);
@@ -1686,7 +1687,8 @@
             }
         });
 
-        $("#selec_hospital").click(() => {
+        $("#selec_hospital").click((e) => {
+            e.preventDefault();
             let prov = $("#select_prov")[0].value;
             let city = $("#select_city")[0].value;
             if (prov == '0' || city == '0') {
