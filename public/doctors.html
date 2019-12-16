@@ -80,8 +80,10 @@
             $("#info").show();
         }
         let name = sessionStorage.getItem('docid');
+        let did=sessionStorage.getItem('did');
         axios.post('/getdocinfo', {
-            name_ch: name
+            name_ch: name,
+            did:did
         })
             .then(res => {
                 console.log(res.data);
