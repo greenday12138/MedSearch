@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 router.post('/selectdoctor', function (req, res, next) {
   console.log(req.body);
   var sql = {
-    sql: 'select (doctor_id,name_ch,doctor_profession) from `doctor` natural join `name` where doctor_political= ? and doctor_faculty= ?',
+    sql: 'select (doctor_id,name.name_ch,doctor_profession) from `doctor` natural join `name` where doctor_political= ? and doctor_faculty= ?',
     values: [req.body.faculty, req.body.political]
   }
   db.DBConnection.getConnection(function (err, connection) {
@@ -46,20 +46,20 @@ router.post('/selecthospital', function (req, res, next) {
     values: [req.body.city, req.body.prov]
   };
   db.DBConnection.getConnection(function (err, connection) {
-    if(err){
+    if (err) {
       console.error(err);
       return;
     }
-    connection.query(sql,function(err,rows,fields){
-      if(err){
+    connection.query(sql, function (err, rows, fields) {
+      if (err) {
         console.error(err);
         return;
       }
-      var data=[];
-      for(var i=0,max=rows.length;i<max;++i){
+      var data = [];
+      for (var i = 0, max = rows.length; i < max; ++i) {
         data.push({
-          hospital_id:rows[i].hospital_id,
-          hospital_name:rows[i].hospital_name
+          hospital_id: rows[i].hospital_id,
+          hospital_name: rows[i].hospital_name
         })
       }
 
@@ -71,14 +71,43 @@ router.post('/selecthospital', function (req, res, next) {
   })
 })
 
-router.post('/getdocinfo',function(req,res,next){
-  var sql={
-    sql:'select * from `doctor` natural join `name`'
+router.post('/getdocinfo', function (req, res, next) {
+  var sql = {
+    sql: 'select * from `doctor` natural join `name`'
   }
 })
 
-router.post('/gehospitalinfo',function(req,res,next){
+router.post('/gethosinfo', function (req, res, next) {
+  console.log(req.body);
 
+  db.DBConnection.getConnection(function (err, connection) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    connection.query('select * from `hospital` natural join `city` where hospital_id=?',
+      [req.body.id], function (err, rows) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        var data = [];
+        for (var i = 0, max = rows.length; i < max; ++i) {
+          data.push({
+            hospital_id: rows[i].hospital_id,
+            hospital_name: rows[i].hospital_name,
+            hospital_class: rows[i].hospital_class,
+            hospital_address: rows[i].hospital_address,
+            hospital_introduction: rows[i].hospital_introduction,
+            city_name: rows[i].city_name,
+            city_province: rows[i].city_province
+          })
+        }
+        console.log(data);
+        res.json(data);
+      })
+    connection.release();
+  })
 })
 
 module.exports = router;
