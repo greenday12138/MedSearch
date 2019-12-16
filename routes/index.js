@@ -106,9 +106,8 @@ router.post('/getdocinfo', function (req, res, next) {
         data.abbre_surname = rows[0].abbre_surname;
         data.full_firstname = rows[0].full_firstname;
         data.abbre_firstname = rows[0].abbre_firstname;
-      }
 
-      connection.query('select article_id,author_order,department from `article` where doctor_id= ?',
+        connection.query('select article_id,author_order,department from `article` where doctor_id= ?',
         data.doctor_id, function (err, re) {
           if (err) {
             console.error(err);
@@ -128,6 +127,9 @@ router.post('/getdocinfo', function (req, res, next) {
           console.log(data);
           res.json(data);
         })
+      }else{
+        res.json(null);
+      }
     })
     connection.release();
   })
@@ -156,10 +158,12 @@ router.post('/gethosinfo', function (req, res, next) {
           data.hospital_introduction = rows[0].hospital_introduction;
           data.city_name = rows[0].city_name;
           data.city_province = rows[0].city_province;
-        }
 
-        console.log(data);
-        res.json(data);
+          console.log(data);
+          res.json(data);
+        }else{
+          res.json(null);
+        }
       })
     connection.release();
   })

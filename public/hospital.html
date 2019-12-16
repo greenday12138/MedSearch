@@ -31,7 +31,7 @@
             <div class="card-header">
                 医院档案
             </div>
-            <div class="card-body" style="display: none;">
+            <div id='info' class="card-body" style="display: none;">
                 <img style="width: 200px;height: 150px;" src="src/img/hospital.jpg">
                 <h5 id="name" class="card-title">永远亭医院</h5>
                 <p id="class" class="card-text">等级</p>
@@ -46,21 +46,27 @@
                     <li for="1" class="list-group-item collapse-open">11111111111111111</li>
                     <div class="collapse" id="1">
                         <div class="card card-body">
-                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                            squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                            ea proident.
                         </div>
-                      </div>
+                    </div>
                     <li for="2" class="list-group-item collapse-open">22222222222222222222</li>
                     <div class="collapse" id="2">
                         <div class="card card-body">
-                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                            squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                            ea proident.
                         </div>
-                      </div>
+                    </div>
                     <li for="3" class="list-group-item collapse-open">33333333333333333333333</li>
                     <div class="collapse" id="3">
                         <div class="card card-body">
-                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                            squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                            ea proident.
                         </div>
-                      </div>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -75,14 +81,14 @@
             let id = $(this).attr('for');
             $(".collapse[id=\'" + id + "\']").collapse('show');
         });
-        $("#info").on('click',function(){
-            axios.post('/staffinfo',{
-                name:sessionStorage.getItem('hosid')
+        $("#info").on('click', function () {
+            axios.post('/staffinfo', {
+                name: sessionStorage.getItem('hosid')
             })
-                .then(res=>{
+                .then(res => {
                     console.log(res.data);
                 })
-                .catch(err=>{
+                .catch(err => {
                     console.error(err);
                 })
         })
@@ -99,27 +105,24 @@
             $("#prov")[0].innerText = data.city_province;
             $("#info").show();
 
-            
+
         }
 
         let key = sessionStorage.getItem('hosid');
 
-        axios.post('/gethosinfo',{
-            name:key
-        })
-        .then(res => {
-            console.log(res.data);
-            setInfo(res.data);
+        axios.post('/gethosinfo', {
+            name: key
         })
             .then(res => {
                 console.log(res.data);
-                if(!res.data){
-                    alert("不存在这个医院");
-                window.location.href = "index.html";
-                }else{
-                    setInfo(res.data);
-                }
                 
+                if (res.data) {
+                    setInfo(res.data);  
+                } else {
+                    alert("不存在这个医院");
+                    window.location.href = "index.html";
+                }
+
             })
             .catch(err => {
                 alert("不存在这个医院");

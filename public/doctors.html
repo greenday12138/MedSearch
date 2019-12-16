@@ -84,7 +84,7 @@
             name_ch: name
         })
             .then(res => {
-                console.log(res);
+                console.log(res.data);
                 if(res.data){
                     SetInfo(res.data);
                 }else{
@@ -95,7 +95,7 @@
                 
             })
             .catch(err => {
-                alert("不存在这个医生");
+                //alert("不存在这个医生");
                 window.location.href="index.html";
                 console.error(err);
             })
