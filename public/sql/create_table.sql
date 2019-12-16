@@ -4,11 +4,11 @@ USE medic;
 
 CREATE TABLE IF NOT EXISTS `name`(
    `name_id` INT AUTO_INCREMENT,
-   `name_ch` VARCHAR(10),
-   `pinying` VARCHAR(15),
+   `name_ch` VARCHAR(10) UNIQUE,
+   `pinying` VARCHAR(20),
    `full_surname` VARCHAR(10),
    `abbre_surname` VARCHAR(5),
-   `full_firstname` VARCHAR(10),
+   `full_firstname` VARCHAR(20),
    `abbre_firstname` VARCHAR(5),
    PRIMARY KEY (`name_id`)
 );
@@ -44,26 +44,26 @@ CREATE TABLE IF NOT EXISTs `hospital`(
 
 CREATE TABLE IF NOT EXISTS `doctor`(
    `doctor_key` INT AUTO_INCREMENT,
-   `doctor_id` CHAR(10) NOT NULL UNIQUE,
-   `doctor_faculty` VARCHAR(10) NOT NULL,
-   `doctor_profession` VARCHAR(10),
+   `doctor_id` CHAR(8) NOT NULL UNIQUE,
+   `doctor_faculty` VARCHAR(20) NOT NULL,
+   `doctor_profession` VARCHAR(20),
    `doctor_political` VARCHAR(10),
-   `doctor_expertise` TINYTEXT,
-   `doctor_description` TEXT,
+   `doctor_expertise` LONGTEXT,
+   `doctor_description` LONGTEXT,
    `doctor_status` VARCHAR(10),
    `hospital_id` CHAR(8) NOT NULL,
-   `name_id` INT NOT NULL,
+   `name_ch` VARCHAR(10) NOT NULL,
    PRIMARY KEY (`doctor_key`),
-   FOREIGN KEY (`name_id`) REFERENCES `name`(`name_id`),
+   FOREIGN KEY (`name_ch`) REFERENCES `name`(`name_ch`),
    FOREIGN KEY (`hospital_id`) REFERENCES `hospital`(`hospital_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `article`(
    `article_key` INT AUTO_INCREMENT,
-   `article_id` VARCHAR(50) NOT NULL UNIQUE,
+   `article_id` VARCHAR(50) NOT NULL,
    `author_order` CHAR(10) NOT NULL,
-   `department` TINYTEXT NOT NULL,
+   `department` TEXT NOT NULL,
    `doctor_id` CHAR(10) NOT NULL,
-   PRIMARY KEY ( `article_key` )
-   # FOREIGN KEY (`doctor_id`) REFERENCES `doctor`(`doctor_id`)
+   PRIMARY KEY ( `article_key` ),
+   FOREIGN KEY (`doctor_id`) REFERENCES `doctor`(`doctor_id`)
 );
