@@ -230,8 +230,8 @@
                 alert("请选择完整筛选条件");
             }else{
                 axios.post('/selectdoctor',{
-                    type:type,
-                    second:second
+                    political:type,
+                    faculty:second
                 })
                 .then(res => {
                     console.log(res.data);
