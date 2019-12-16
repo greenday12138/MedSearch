@@ -198,7 +198,7 @@
             let li=document.createElement('li');
             li.className="col-4";
             li.style.setProperty('float','left');
-            li.innerHTML='<a class="hospital" onclick="showhos(this)" data='+data+'  href="#">'+name+'</a>';
+            li.innerHTML='<a class="hospital" onclick="showhos(this)" dataid='+data+'  href="#">'+name+'</a>';
             return li;
         }
 
@@ -212,6 +212,11 @@
             window.location.href="./doctors.html";
         }
 
+        function showhos(el){
+            let id=el.getAttribute("dataid");
+            sessionStorage.setItem('hosid',id);
+            window.location.href="./hospital.html";
+        }
 
     </script>
 
