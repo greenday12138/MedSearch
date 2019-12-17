@@ -4,7 +4,7 @@ USE medic;
 
 CREATE TABLE IF NOT EXISTS `name`(
    `name_id` INT AUTO_INCREMENT,
-   `name_ch` VARCHAR(10) UNIQUE,
+   `name_ch` VARCHAR(10) NOT NULL UNIQUE,
    `pinying` VARCHAR(20),
    `full_surname` VARCHAR(10),
    `abbre_surname` VARCHAR(5),
@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `county`(
 CREATE TABLE IF NOT EXISTs `hospital`(
    `hospital_key` INT AUTO_INCREMENT,
    `hospital_id` CHAR(8) NOT NULL UNIQUE,
-   `hospital_name` VARCHAR(15) NOT NULL,
+   `hospital_name` VARCHAR(25) NOT NULL,
    `hospital_class` CHAR(2),
    `hospital_address` TINYTEXT,
-   `hospital_introduction` TINYTEXT,
+   `hospital_introduction` LONGTEXT,
    `city_code` CHAR(12) NOT NULL,
    PRIMARY KEY (`hospital_key`),
    FOREIGN KEY (`city_code`) REFERENCES `city`(`city_code`)
